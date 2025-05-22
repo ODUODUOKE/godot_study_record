@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqp1alsrqmhp8"]
+
+[ext_resource type="Texture2D" uid="uid://cmro4ext1mkke" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_iukft"]
+[ext_resource type="PackedScene" uid="uid://16pmcbmgm7wo" path="res://Scenes/player.tscn" id="2_gl6un"]
+[ext_resource type="PackedScene" uid="uid://c7x3dbqy6mxt" path="res://Scenes/slime.tscn" id="3_j5yw3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gl6un"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Background01" type="Sprite2D" parent="Background"]
+position = Vector2(123, 142)
+texture = ExtResource("1_iukft")
+metadata/_edit_lock_ = true
+
+[node name="Background02" type="Sprite2D" parent="Background"]
+position = Vector2(362, 142)
+texture = ExtResource("1_iukft")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(241, 140)
+zoom = Vector2(2.385, 2.385)
+
+[node name="Player" parent="." instance=ExtResource("2_gl6un")]
+position = Vector2(34, 174)
+scale = Vector2(3.965, 3.965)
+
+[node name="Boundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boundary"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D"]
+position = Vector2(228, 275)
+shape = SubResource("WorldBoundaryShape2D_gl6un")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Boundary"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundary/StaticBody2D2"]
+position = Vector2(228, 157)
+rotation = 3.1368
+shape = SubResource("WorldBoundaryShape2D_gl6un")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Boundary"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundary/StaticBody2D3"]
+position = Vector2(5, 208)
+rotation = 1.57517
+shape = SubResource("WorldBoundaryShape2D_gl6un")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Boundary"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundary/StaticBody2D4"]
+position = Vector2(479, 208)
+rotation = -1.57243
+shape = SubResource("WorldBoundaryShape2D_gl6un")
+
+[node name="Slime" parent="." instance=ExtResource("3_j5yw3")]
+position = Vector2(226, 210)
