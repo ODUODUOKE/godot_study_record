@@ -142,16 +142,16 @@ animator = NodePath("AnimatedSprite2D")
 bullet_scene = ExtResource("2_6t5aa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(6, 9)
-scale = Vector2(0.45, 0.45)
+position = Vector2(6, 11)
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_f60y1")
 animation = &"game_over"
 autoplay = "idle"
 frame_progress = 0.576721
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, 11)
-scale = Vector2(0.46, 0.46)
+position = Vector2(5, 12)
+scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_cvnsp")
 
 [node name="Timer" type="Timer" parent="."]

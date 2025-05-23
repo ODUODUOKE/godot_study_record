@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqp1alsrqmhp8"]
+[gd_scene load_steps=6 format=3 uid="uid://dqp1alsrqmhp8"]
 
 [ext_resource type="Texture2D" uid="uid://cmro4ext1mkke" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_iukft"]
+[ext_resource type="Script" uid="uid://uul546u7o46m" path="res://Scripts/GameManage.gd" id="1_kldst"]
 [ext_resource type="PackedScene" uid="uid://16pmcbmgm7wo" path="res://Scenes/player.tscn" id="2_gl6un"]
 [ext_resource type="PackedScene" uid="uid://c7x3dbqy6mxt" path="res://Scenes/slime.tscn" id="3_j5yw3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gl6un"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("slime_timer")]
 y_sort_enabled = true
+script = ExtResource("1_kldst")
+slime_scene = ExtResource("3_j5yw3")
+slime_timer = NodePath("Timer")
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -63,4 +67,11 @@ rotation = -1.57243
 shape = SubResource("WorldBoundaryShape2D_gl6un")
 
 [node name="Slime" parent="." instance=ExtResource("3_j5yw3")]
-position = Vector2(226, 210)
+visible = false
+position = Vector2(503, 163)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_spawn_slime"]
