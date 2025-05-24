@@ -30,13 +30,16 @@ func _physics_process(delta: float) -> void:
 	
 # 游戏结束	
 func game_over() -> void:
-	is_game_over = true
-	# 播放游戏结束动画
-	animator.play("game_over")
-	# 等待3s执行
-	await get_tree().create_timer(3).timeout
-	# 开始游戏，重新加载场景
-	get_tree().reload_current_scene()
+	if not is_game_over: 
+		is_game_over = true
+		# 播放游戏结束动画
+		animator.play("game_over")
+		# 主场景，展示游戏结束文字
+		get_tree().current_scene.show_game_over()
+		# 等待3s执行
+		await get_tree().create_timer(3).timeout
+		# 开始游戏，重新加载场景
+		get_tree().reload_current_scene()
 	
 
 

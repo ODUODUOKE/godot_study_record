@@ -30,6 +30,8 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):
 		# 史莱姆 状态，死亡
 		is_dead = true 
+		# 获取当前主场景（因为score在主场景下，通过获取当前场景，间接获取主场景的对象）
+		get_tree().current_scene.score += 1
 		# 子弹场景，销毁
 		area.queue_free()
 		# 播放，史莱姆死亡动画

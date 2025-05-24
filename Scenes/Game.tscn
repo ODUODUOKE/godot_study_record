@@ -1,17 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqp1alsrqmhp8"]
+[gd_scene load_steps=7 format=3 uid="uid://dqp1alsrqmhp8"]
 
 [ext_resource type="Texture2D" uid="uid://cmro4ext1mkke" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_iukft"]
 [ext_resource type="Script" uid="uid://uul546u7o46m" path="res://Scripts/GameManage.gd" id="1_kldst"]
 [ext_resource type="PackedScene" uid="uid://16pmcbmgm7wo" path="res://Scenes/player.tscn" id="2_gl6un"]
 [ext_resource type="PackedScene" uid="uid://c7x3dbqy6mxt" path="res://Scenes/slime.tscn" id="3_j5yw3"]
+[ext_resource type="FontFile" uid="uid://bvyjj5oaoxgr3" path="res://AssetBundle/Uranus_Pixel_11Px.ttf" id="5_b2bpf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gl6un"]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("slime_timer")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("slime_timer", "score_label", "show_game_over_label")]
 y_sort_enabled = true
 script = ExtResource("1_kldst")
 slime_scene = ExtResource("3_j5yw3")
 slime_timer = NodePath("Timer")
+score_label = NodePath("CanvasLayer/Label")
+show_game_over_label = NodePath("CanvasLayer/Game Over Label")
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -69,5 +72,34 @@ shape = SubResource("WorldBoundaryShape2D_gl6un")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 21.0
+offset_right = 85.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("5_b2bpf")
+theme_override_font_sizes/font_size = 20
+text = "score：0"
+
+[node name="Game Over Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.5
+offset_top = -25.0
+offset_right = 141.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("5_b2bpf")
+theme_override_font_sizes/font_size = 50
+text = "Game Over !"
 
 [connection signal="timeout" from="Timer" to="." method="_spawn_slime"]
