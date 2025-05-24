@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Bgm="*res://Scenes/Bgm.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
