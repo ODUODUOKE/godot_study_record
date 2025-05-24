@@ -49,10 +49,8 @@ func game_over() -> void:
 		# 播放游戏结束音效
 		$GameOverSound.play()
 		
-		# 等待3s执行
-		await get_tree().create_timer(3).timeout
-		# 开始游戏，重新加载场景
-		get_tree().reload_current_scene()
+		## 开始游戏，重新加载场景
+		$RestartTimer.start()
 	
 
 
@@ -73,5 +71,6 @@ func on_fire() -> void:
 	$FireSound.play()
 	
 	
-	
-	
+# 重新加载场景（解决上一个倒计时，会重启场景的时候屏幕闪烁下）
+func _reload_scene() -> void:
+	get_tree().reload_current_scene()
