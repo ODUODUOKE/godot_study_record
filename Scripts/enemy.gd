@@ -19,8 +19,8 @@ func _physics_process(delta: float) -> void:
 
 # 碰撞检测 - 和玩家碰撞
 func _on_body_entered(body: Node2D) -> void:
-	# 如果 body 属于 CharacterBody2D（人物对象）
-	if body is CharacterBody2D:
+	# 如果 body 属于 CharacterBody2D（人物对象），并且史莱姆当前非死亡状态，才判断当前玩家输掉游戏
+	if body is CharacterBody2D and not is_dead:
 		# 游戏结束
 		body.game_over()
 
@@ -36,6 +36,8 @@ func _on_area_entered(area: Area2D) -> void:
 		area.queue_free()
 		# 播放，史莱姆死亡动画
 		animator.play("dead")
+	 	# 播放史莱姆死亡音效
+		$DeadthSound.play()	
 		# 等待0.6秒
 		await get_tree().create_timer(0.6).timeout
 		# 史莱姆场景，销毁（若不销毁，则史莱姆死亡动画会一直移动到屏幕外）

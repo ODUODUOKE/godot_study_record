@@ -9,6 +9,15 @@ extends CharacterBody2D
 # 是否游戏结束
 var is_game_over:bool = false 
 
+# 需要每秒检测玩家是否在移动，然后控制跑步音效的启动/关闭
+# Ps：播放声音和物理计算没有关系
+func _process(delta: float) -> void:
+	if velocity == Vector2.ZERO or is_game_over:
+		$RuningSound.stop()
+	elif  not $RuningSound.playing:
+		$RuningSound.play()
+	
+
 #启动后每秒运行（physics_process按照实际硬件处理）
 func _physics_process(delta: float) -> void:
 	
@@ -36,6 +45,10 @@ func game_over() -> void:
 		animator.play("game_over")
 		# 主场景，展示游戏结束文字
 		get_tree().current_scene.show_game_over()
+		
+		# 播放游戏结束音效
+		$GameOverSound.play()
+		
 		# 等待3s执行
 		await get_tree().create_timer(3).timeout
 		# 开始游戏，重新加载场景
@@ -55,6 +68,9 @@ func on_fire() -> void:
 	bullet_node.position = position + Vector2(50,47)
 	# 添加子弹到当前场景中
 	get_tree().current_scene.add_child(bullet_node)
+	
+	# 播放子弹发射音效（注意:此处是拖拽到代码中引用，如果需要变更FireeSound名称，则需要通过@export配置）
+	$FireSound.play()
 	
 	
 	
