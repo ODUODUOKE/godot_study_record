@@ -12,6 +12,10 @@ var is_dead:bool = false
 func _physics_process(delta: float) -> void:
 	if not is_dead :
 		position += Vector2(slime_speed,0) * delta
+		
+	if position.x < -39:
+		#prints("史莱姆 销毁")
+		queue_free()
 
 # 碰撞检测 - 和玩家碰撞
 func _on_body_entered(body: Node2D) -> void:
