@@ -150,7 +150,7 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_f60y1")
 animation = &"game_over"
 autoplay = "idle"
-frame_progress = 0.576721
+frame_progress = 0.518909
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, 12)
@@ -174,5 +174,4 @@ stream = ExtResource("5_fkybt")
 wait_time = 3.0
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="on_fire"]
 [connection signal="timeout" from="RestartTimer" to="." method="_reload_scene"]

@@ -25,16 +25,25 @@ func _physics_process(delta: float) -> void:
 	#	获取键盘方向输入 * 移动速度
 	#	left、right、up、down 需要提前在项目中设置绑定对应按键
 		velocity = Input.get_vector("left","right","up","down") * move_speed
-		
 	#	如果移动速度 = 0，则显示 idle 动画
 		if velocity == Vector2.ZERO:
 			animator.play("idle")
 		else:
 			#显示 run 动画
 			animator.play("run")
-
 		#移动
 		move_and_slide()  
+		
+		
+		if Input.is_action_just_pressed("fire"):
+			#只有当按键按下那一帧才会判断通过
+			on_fire()
+		#if Input.is_action_just_released("fire"):
+			##只有当按键释放那一帧才会判断通过
+			#on_fire()
+		#if Input.is_action_pressed("fire"):
+			##只要按键处于按下状态，每一帧都会判断通过
+			#on_fire()
 	
 	
 # 游戏结束	
@@ -56,8 +65,9 @@ func game_over() -> void:
 
 # 子弹发射
 func on_fire() -> void:
-	# 如果玩家位置移动不等于0 或 游戏结束，则return不进行以下代码逻辑
-	if velocity!=Vector2.ZERO or is_game_over:
+	
+	#if velocity!=Vector2.ZERO or is_game_over: # 如果玩家位置移动不等于0 或 游戏结束，则return不进行以下代码逻辑
+	if is_game_over: # 如果游戏结束，则停止发射子弹
 		return
 	
 	# 生成子弹对象
